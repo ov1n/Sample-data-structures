@@ -1,4 +1,5 @@
 #include<iostream>
+#include<cassert>
 using namespace std;
 
 class bin_tree{
@@ -14,7 +15,7 @@ class bin_tree{
 	public:
 		bin_tree();
 		bin_tree(int data);
-		~bin_tree();
+		~bin_tree();  					//destructor not working properly
 		struct node* createNode();
 		void insert(int data);
 		void search(struct node *ptr); //change pointer, only temp
@@ -24,13 +25,16 @@ class bin_tree{
 };
 
 int main(){
-	bin_tree bree=bin_tree(44);
-	cout<<bree.display();
+	bin_tree bree=bin_tree(55);
+	cout<<bree.display()<<endl;
+	bree.~bin_tree();  
+	cout<<bree.display()<<endl;
 	return 0;
 }
 
 bin_tree::bin_tree(int data){
 	root=new node;
+	assert(root!=0);		//asserting
 	root->value=data;
 	root->left=NULL;
 	root->right=NULL;
@@ -39,11 +43,12 @@ bin_tree::bin_tree(int data){
 void bin_tree::search(struct node *ptr){
 	 	
 	if(ptr==NULL){
+		cout<<"empty node\n"<<endl;
 		return;
 	}
 	search(ptr->left);
 	search(ptr->right);
-	delete[]ptr;
+	delete &ptr;
 }
 
 bin_tree::~bin_tree(){
@@ -51,6 +56,9 @@ bin_tree::~bin_tree(){
 }
 
 bin_tree::display(){
+	if(root==NULL){
+		cout<<"Root is empty\n";
+	}
 	return root->value;
 }
 
