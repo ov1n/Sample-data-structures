@@ -7,6 +7,12 @@ Current Status:
 C++:
 
 ---
+Binary Tree
+
+
+C++:
+
+---
 
 Stack-Complete
-Binary Tree- In progress
+
